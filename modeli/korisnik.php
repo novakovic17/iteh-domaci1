@@ -12,5 +12,10 @@ class Korisnik{
         $this->password=$password;
     }
 
-
+    
+    public static function login($korisnik, mysqli $conn)
+    {
+        $query = "SELECT * FROM korisnik WHERE username='$korisnik->username' and password='$korisnik->password'";
+        return $conn->query($query);
+    }
 }

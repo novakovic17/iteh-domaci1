@@ -1,3 +1,24 @@
+<?php
+include 'konekcija.php';
+include 'modeli/proizvod.php';
+include 'modeli/kategorija.php';
+
+session_start();
+
+$user="";
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: login.php');
+    exit();
+}
+if (isset($_COOKIE["admin"]))
+    {
+        $user=$_COOKIE["admin"];
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +71,22 @@
     </div>
 
 
+    <div class="container pt" style="margin-top:20px; margin-bottom: 200px; ">
+    <div id="searchDiv" >
+        <label for="pretraga"style="color:white ;font-weight:bold ;font-size:22px; padding-bottom:20px">Pretraga proizvoda na osnovu kategorije</label>
+        <select id="pretraga" onchange="pretraga()" class="form-control" style=" font-size:20px ;" >
+            <?php
+            $rez = $conn->query("SELECT * from kategorija");
+
+            while ($red = $rez->fetch_assoc()) {
+            ?>
+                <option 
+                value="<?php echo $red['kategorijaId'] ?>"> <?php echo $red['imeKategorije'] ?></option>
+            <?php   }
+            ?>
+        </select>
+    </div>
+
     <div id="podaciPretraga"style="font-size:18px ; margin-top:-40px" ></div>
     </div>
 
@@ -79,7 +116,15 @@
                                         <input type="text" style="border: 1px solid black" name="cena" class="form-control" />
                                     </div>
                                     <div class="form-group">
-
+                                    <select id="kategorijaId" name="kategorijaId" class="form-control">
+                                            <?php
+                                            $rez = $conn->query("SELECT * from kategorija");
+                                            while ($red = $rez->fetch_array()) {
+                                            ?>
+                                                <option name="value" value="<?php echo $red['kategorijaId'] ?>"> <?php echo $red['imeKategorije'] ?></option>
+                                            <?php  }
+                                            ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <button id="btnDodaj" type="submit" class="btn btn-success btn-block" style="background-color: #f4a9c9">

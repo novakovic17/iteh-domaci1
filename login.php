@@ -1,7 +1,7 @@
 <?php
 
 include "konekcija.php";
-require "model/korisnik.php";
+require "modeli/korisnik.php";
 
 session_start();
 

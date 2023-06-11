@@ -1,7 +1,7 @@
 <?php
     require '../konekcija.php';
-    require '../model/kategorija.php';
-    require '../model/proizvod.php';
+    require '../modeli/kategorija.php';
+    require '../modeli/proizvod.php';
 
     if(isset($_GET['kategorijaId']))
     {

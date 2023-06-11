@@ -1,3 +1,32 @@
+<?php
+
+include "konekcija.php";
+require "model/korisnik.php";
+
+session_start();
+
+if(isset($_POST['username']) && isset($_POST['password'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $korisnik = new Korisnik(1, $username, $password);
+    $admin = Korisnik::login($korisnik, $conn);
+
+    if($admin->num_rows==1){
+        $_SESSION['admin'] = $korisnik->username;
+        setcookie("admin", $username, time() + 3600);
+        header('Location: index.php');
+        exit();
+    }else{
+        echo '<script type="text/javascript">
+               window.onload = function () { alert("Losi kredencijali, pokusajte ponovo."); } 
+              </script>'; 
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

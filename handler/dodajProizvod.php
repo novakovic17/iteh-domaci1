@@ -1,6 +1,6 @@
 <?php
  require '../konekcija.php';
- require '../model/proizvod.php';
+ require '../modeli/proizvod.php';
 
 
  if(isset($_POST['imeProizvoda']) && isset($_POST['kolicina']) && isset($_POST['cena']) && isset($_POST['kategorijaId'])){

@@ -141,6 +141,26 @@ if (isset($_COOKIE["admin"]))
 
     </div>
 
+    <script>
+        function pretraga() {
+            $.ajax({
+                url: "handler/pretragaProizvoda.php",
+                data: {
+                    kategorijaId: $("#pretraga").val()
+                },
+                success: function(html) {
+                    $("#podaciPretraga").html(html);
+                }
+            })
+        }
+    </script>
+
+
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
 
    
 </body>
